@@ -20,28 +20,28 @@
 ## Configure Linux Server
  #### step 1: 
  
-     ```ssh -i filename(linux_server_31_01_2019).pem ubuntu @ IP address```
+```   ssh -i filename(linux_server_31_01_2019).pem ubuntu @ IP address ```
   
  #### Step 2: Update and upgrade installed packages
 
-      ```
+```
       sudo apt-get update
       sudo apt-get upgrade
-      ```
+```
  #### step 3: Change the SSH port from 22 to 2200
 
 - Edit the `/etc/ssh/sshd_config` file: `sudo vi /etc/ssh/sshd_config`.
 - Change the port number on line 5 from `22` to `2200`.
 - Save and exit using esc and confirm with :wq.
 #### step 4: Restart ssh
-      `sudo service ssh restart`
+`         sudo service ssh restart     `
 #### step 5:
 To check port 2200 wether working or not by 
-      ```
+ ```
      ssh -i linux_server_31_31_2019.pem -p 2200 ubuntu@IP address
-      ```
+```
  #### step 6:Run following commands
-     ```
+ ```
      sudo ufw default deny incoming
      sudo ufw default allow outgoing
      sudo ufw default allow 2200/TCP
@@ -51,62 +51,60 @@ To check port 2200 wether working or not by
      sudo ufw default enable
      To check status:
      sudo ufw status
-                      ```
+```
  
 ### Creating Grader User
 #### Step 1. Login to ubuntu and add user 
        
-       ``` sudo adduser grader and password: grader```
+```   sudo adduser grader and password: grader```
 
 #### Step 2. Now give the grader premissions 
-              ```sudo visudo```
+ ```      sudo visudo   ```
          Now add this line ```grader ALL= (ALL:ALL) ALL``` and save and exit(ctl+X)
          
 #### Step 3.To verify the grader as sudo permission 
-      
-      ```su -grader and password: grader ```
+ ```     su -grader and password: grader ```
 
 #### Step 4. Now, give SSH key-pair for grader.
        Create .ssh folder by 
-           ```mkdir /home/grader/.ssh```
+```      mkdir /home/grader/.ssh ```
      
 #### Step 5. Change it to grader 
        
-       ```su grader password:grader```.
+```      su grader password:grader ```.
            
 #### step 6. Copy authorised key
       
-      ``` sudo -cp /home/ubuntu/.ssh/authorized_keys /home/grader/.ssh/authorized_keys```
+```       sudo -cp /home/ubuntu/.ssh/authorized_keys /home/grader/.ssh/authorized_keys ```
            
 #### Step 6.  change ownership 
         
-        ``` chown grader.grader /home/grader/.ssh```.
+```       chown grader.grader /home/grader/.ssh```.
 
 #### Step 7. adding grader to sudogroup.
-    ```
+ ```
              sudo su
              usermod -aG sudo grader
-    ```
+ ```
 #### Step 8. Change permissions tp .ssh folder.
-    ```
+```
       chmod 700 /home/grader/.ssh
       chmod 644 /home/grader/.ssh/authorized_keys
       vi /etc/ssh/sshd_config
       There at authentication edit as permit root login no and pubkey authentication yessave and exit(ecs+:wq)
-    ```
+```
 #### Step 9. Now restart the service
        
-       ``` sudo service ssh restart```.
+ ``` sudo service ssh restart```.
 
 #### Step 10. After restart open the server with grader 
              
-             ```ssh -i filename.pem -p 2200 grader@IPaddress```.
+```ssh -i filename.pem -p 2200 grader@IPaddress```.
            
 ### Configure the local timezone to UTC
 To,set time zone for grader the command as follows
-     ```
-     sudo dpkg-reconfigure tzdata
-     ```
+ ```
+ ```
 ### Process of Installing Apache and postgresql software
 
 #### Step 1. Now istall apache software at grader
@@ -114,48 +112,48 @@ To,set time zone for grader the command as follows
           sudo apt-get install apache2
 ```
 #### Step 2. Now again install library functions of apache 
-         ```
+ ```
            sudo apt-get install libapache2-mod-wsgi-py3
-         ```
+```
    Now, enable wsgi 
-           ```sudo a2enmod wsgi```
+```             sudo a2enmod wsgi   ```
 #### Step 3. To check that apache has installed successfully or not, Open web browser and type your IP Address.
 
 #### Step 4. After enable of wsgi install some libraries of python development 
         
-        ```sudo apt-get install libpq-dev python-dev```.
+```            sudo apt-get install libpq-dev python-dev```.
 
 #### Step 5. Now, install postgresql 
          
-         ``` sudo apt-get install postgresql postgresql-contrib```.
+```             sudo apt-get install postgresql postgresql-contrib```.
 
 #### Step 6. After installation of postgresql, change to postgresql from grader.
-    ```
+```
     sudo su - postgres
     psql
-    ```
+```
 #### Step 7. Now create a user, 
          
-         ```create user catalog with password 'catalog';```.
+```         create user catalog with password 'catalog';```.
 
 #### Step 8. Now alter the user, 
          
-         ```alter user catalog createdb;```.
+```        alter user catalog createdb;```.
 
 #### Step 9. Create a database, 
          
-         ```create database catalog with owner catalog ;```.
+ ```        create database catalog with owner catalog ;```.
 
 #### Step 10.  Now change to catalog database 
-           ```\c catalog```.
+```         \c catalog```.
 
 #### Step 11. Now revoke all the schemas 
 
-     ```revoke all on schema public from public;```.
+ ```     revoke all on schema public from public;```.
 
 #### Step 12. Now grant all the public schemas to catlog 
      
-     ``` grant all on schema public to catalog;```.
+```         grant all on schema public to catalog;```.
 
 #### Step 13. Now exit from the database.
 
@@ -164,22 +162,22 @@ To,set time zone for grader the command as follows
 
 #### Step 1.  install git 
          
-         ```sydo apt-get install git```.
+ ```        sudo apt-get install git```.
 
 #### Step 2.  change the directory to www 
-               ```cd /var/www```.
+  ```        cd /var/www```.
 
 #### Step 3. Now clone our git project here 
           
-          ```sudo git clone url_link(https://github.com/jyoshnamaniaddala/catalog.git)```.
+```      sudo git clone url_link(https://github.com/jyoshnamaniaddala/catalog.git)```.
 
 #### Step 4. Now change the owner permissions 
          
-         ```sudo chown -R grader:grader catalog```.
+```        sudo chown -R grader:grader catalog```.
 
 #### Step 5. Now change the name of main file name 
-        
-        ```sudo mv project.py __init__.py```.
+
+```     sudo mv project.py __init__.py```.
 
 #### Step 6. Now in python files change the database sqllite engine to postgres engine.
 ```
@@ -263,23 +261,23 @@ sudo virtualenv -p python venv3
 ```
 
 * Now enable site 
-      ```sudo a2ensite catalog``` 
+```sudo a2ensite catalog``` 
           
 
 * Deactivate the virtual environment: 
-           `deactivate`.
+ `deactivate`.
 
 *Disable the default Apache site
 
-        `sudo a2dissite 000-default.conf`. 
+ `sudo a2dissite 000-default.conf`. 
      
   The following prompt will be returned:
 
-  ```
+```
   Site 000-default disabled.
   To activate the new configuration, you need to run:
     service apache2 reload
-  ```
+ ```
 
 * Reload Apache: 
       
@@ -296,7 +294,7 @@ sudo virtualenv -p python venv3
 
 * To check errors in our file,
 
-       ``` sudo tail -f /var/log/apache2/error.log```
+```   sudo tail -f /var/log/apache2/error.log```
   
   
 ## Visit Application
