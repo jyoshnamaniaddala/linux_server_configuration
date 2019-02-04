@@ -227,7 +227,7 @@ http://IPAddress.xip.io/callback, http://IPAddress.xip.io/gconnect.
 ### Setup the flask application
 *  create a file at /var/www/catalog/ with name **catalog.wsgi**.
 ```
-import sys
+  import sys
   import logging
   logging.basicConfig(stream=sys.stderr)
   sys.path.insert(0, "/var/www/catalog/")
