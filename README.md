@@ -13,7 +13,7 @@
  click on **Inbound**.
 - In Inbound, click on edit and add 3 rules i.e,add port SSh 2200, Http port 80, NTP port 123 and save. 
 
-**To use privatekey** [link]()
+**To use privatekey** [link](https://github.com/jyoshnamaniaddala/linux_server_configuration/blob/master/private_key_file)
  #### Public IP Address : 18.232.99.30
  #### Accessable Port : 2200
  
@@ -136,18 +136,18 @@ To,set time zone for grader the command as follows
     ```
 #### Step 7. Now create a user, 
          
-         ```create user catlog with password 'catlog';```.
+         ```create user catalog with password 'catalog';```.
 
 #### Step 8. Now alter the user, 
          
-         ```alter user catlog createdb;```.
+         ```alter user catalog createdb;```.
 
 #### Step 9. Create a database, 
          
-         ```create database catlog with owner catlog ;```.
+         ```create database catalog with owner catalog ;```.
 
-#### Step 10.  Now change to catlog database 
-           ```\c catlog```.
+#### Step 10.  Now change to catalog database 
+           ```\c catalog```.
 
 #### Step 11. Now revoke all the schemas 
 
@@ -155,7 +155,7 @@ To,set time zone for grader the command as follows
 
 #### Step 12. Now grant all the public schemas to catlog 
      
-     ``` grant all on schema public to catlog;```.
+     ``` grant all on schema public to catalog;```.
 
 #### Step 13. Now exit from the database.
 
@@ -183,7 +183,7 @@ To,set time zone for grader the command as follows
 
 #### Step 6. Now in python files change the database sqllite engine to postgres engine.
 ```
-    engine = create_engine('postgresql://catlog:catlog@localhost/catlog')
+    engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
 ```
 
 ### google OAuth credentials:
@@ -193,7 +193,8 @@ To,set time zone for grader the command as follows
 3) Create an OAuth Client ID.
 4) This will require you to configure the consent screen, with the same choices as in the video.
 5) choose Web application  in the list of application types, .
-6) You can then set the authorized JavaScript origins, http://IPAddress.xip.io/login,http://IPAddress.xip.io/callback,http://IPAddress.xip.io/gconnect.
+6) set the authorized JavaScript origins, http://IPAddress.xip.io/login,
+http://IPAddress.xip.io/callback, http://IPAddress.xip.io/gconnect.
 7) You will then be able to get the client ID and client secret.
 
 * update this client id in loginpage,html file
