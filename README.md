@@ -38,7 +38,7 @@
 #### step 5:
 To check port 2200 wether working or not by 
  ```
-     ssh -i linux_server_31_31_2019.pem -p 2200 ubuntu@IP address
+     ssh -i linux_server_31_31_2019.pem -p 2200 ubuntu@IPaddress
 ```
  #### step 6:Run following commands
  ```
@@ -91,7 +91,7 @@ To check port 2200 wether working or not by
       chmod 700 /home/grader/.ssh
       chmod 644 /home/grader/.ssh/authorized_keys
       vi /etc/ssh/sshd_config
-      There at authentication edit as permit root login no and pubkey authentication yessave and exit(ecs+:wq)
+      There at authentication edit as permit root login no and pubkeyauthentication yes save and exit(ecs+:wq)
 ```
 #### Step 9. Now restart the service
        
